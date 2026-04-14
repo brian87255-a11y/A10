@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>A10 Cookie Demo</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align:center;
+    margin-top:100px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+}
+</style>
+
+<script>
+
+function setCookie() {
+    let username = prompt("Enter your name:");
+    if(username != "" && username != null){
+        document.cookie = "username=" + username + "; path=/";
+        alert("Cookie saved!");
+    }
+}
+
+function getCookie() {
+    let name = "username=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(';');
+
+    for(let i = 0; i < cookies.length; i++) {
+        let c = cookies[i].trim();
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    let user = getCookie();
+    if (user != "") {
+        document.getElementById("output").innerHTML =
+        "Welcome back " + user + "! Your cookie was loaded.";
+    } else {
+        document.getElementById("output").innerHTML =
+        "No cookie found. Click the button to create one.";
+    }
+}
+
+</script>
+
+</head>
+
+<body onload="checkCookie()">
+
+<h1>Cookie Demo Page</h1>
+
+<button onclick="setCookie()">Set Cookie</button>
+
+<p id="output"></p>
+
+<footer>
+<p>© Assignment A10 – Brian Rivera – April 14 </p>
+</footer>
+
+</body>
+</html>
